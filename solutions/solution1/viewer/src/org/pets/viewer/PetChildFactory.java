@@ -12,10 +12,10 @@ public class PetChildFactory extends ChildFactory<Pet>{
     @Override
     protected boolean createKeys(List<Pet> list) {
         list.add(new Pet("Bird","org/pets/viewer/images/Bird.gif"));
-        list.add(new Pet("Cat","org/pets/viewer/Bird.gif"));
-        list.add(new Pet("Dog","org/pets/viewer/Dog.gif"));
-        list.add(new Pet("Rabbit","org/pets/viewer/Rabbit.gif"));
-        list.add(new Pet("Pig","org/pets/viewer/Pig.gif"));
+        list.add(new Pet("Cat","org/pets/viewer/images/Cat.gif"));
+        list.add(new Pet("Dog","org/pets/viewer/images/Dog.gif"));
+        list.add(new Pet("Rabbit","org/pets/viewer/images/Rabbit.gif"));
+        list.add(new Pet("Pig","org/pets/viewer/images/Pig.gif"));
         return true;
     }
 
