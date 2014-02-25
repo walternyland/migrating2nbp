@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+OpenIDE-Module: org.pets.provider.cat
+OpenIDE-Module-Layer: org/pets/provider/cat/layer.xml
+OpenIDE-Module-Localizing-Bundle: org/pets/provider/cat/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+
