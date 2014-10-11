@@ -1,0 +1,29 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="Author" content="John O'Hanley">
+   <meta name="GENERATOR" content="Mozilla/4.76 [en] (WinNT; U) [Netscape]">
+   <title>Import and Export</title>
+</head>
+<body>
+
+<h1>
+Import and Export</h1>
+All portfolios may be saved as a single text file (exported), and then
+subsequently restored later (imported).
+<p>This may be used as a backup, or may be done to transfer all portfolios
+to a second machine. (This second machine would have StocksMonitor installed,
+and would perform a corresponding import.)
+<p>The Import-Export services are available under the <tt>File</tt> menu.
+If there are any unsaved edits ( as shown by a "*" at the end of a portfolio
+name), then <tt>File->Save</tt> should be performed before any <tt>File->Export</tt>.
+<p><b>Implementation Note</b>
+<p>The data storage requirements of StocksMonitor are not large. Most users
+would require 1 or 2 portfolios, each with probably less than a dozen stocks.
+StocksMonitor uses JDK 1.4 system Preferences to store all portfolios -
+not text files. This is an unusual design. It was selected to make it more
+convenient for users to switch portfolios : instead of navigating the file
+system, they may simply choose from a simple drop-down list.
+</body>
+</html>

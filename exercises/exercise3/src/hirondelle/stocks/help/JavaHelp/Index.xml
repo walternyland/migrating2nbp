@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE index
+  PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp Index Version 1.0//EN"
+         "http://java.sun.com/products/javahelp/index_1_0.dtd">
+
+<index version="1.0">
+  <indexitem target="newportfolio" text="adding stocks"/>
+  <indexitem target="exportimport" text="backup"/>
+  <indexitem target="editoprtfolios" text="currency"/>
+  <indexitem target="overview" text="feature summary"/>
+  <indexitem target="overview" text="javapractices.com"/>
+  <indexitem target="preferences" text="low vision theme"/>
+  <indexitem target="exportimport" text="Preferences API"/>
+  <indexitem target="exportimport" text="restore"/>
+  <indexitem target="overview" text="source code"/>
+  <indexitem text="tickers">
+    <indexitem target="editportfolios" text="validation"/>
+    <indexitem target="newportfolio" text="suffixes"/>
+  </indexitem>
+  <indexitem target="overview" text="tool set"/>
+  <indexitem target="newportfolio" text="unsaved edits"/>
+</index>

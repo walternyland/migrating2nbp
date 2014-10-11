@@ -1,0 +1,3 @@
+Main-Class: hirondelle.stocks.main.NewLauncher
+Class-Path: jlfgr-1_0.jar jh.jar
+SplashScreen-Image: hirondelle/stocks/main/StocksMonitor.gif

@@ -1,0 +1,86 @@
+<!-- Ant build file for StocksMonitor project -->
+<!-- Please edit as needed to suit your needs and environment -->
+<project name="StocksMonitor" default="init" basedir=".">
+
+<property name="archiveRoot" value="C:\archive\StocksMonitor"/>
+<property name="distRoot" value="C:\Temp\stocks\dist"/>
+<property name="javadocRoot" value="javadoc"/>
+<property name="srcRoot" value="src"/>
+<property name="version" value="1.7.0"/>
+<property name="manifestMainClass" value="src\MainClassManifest.txt"/>
+<property name="targetJar" value="StocksMonitor.jar"/>
+<property name="javadocApiRoots" value="-link http://docs.oracle.com/javase/7/docs/api/"/>
+  
+<fileset id="class.files" dir="${srcRoot}" casesensitive="yes" >
+ <include name="**/*.class"/>
+</fileset>
+
+<target name="init" description="Set timestamp properties and make directories.">
+ <tstamp>
+  <format property="archiveTime" pattern="yyyyMMMdd.H.mm"/>
+ </tstamp>
+ <mkdir dir="${javadocRoot}"/>
+</target>
+
+<target name="clean" depends="init" description="Remove .class files, javadoc, and bin directory.">
+ <delete>
+  <fileset refid="class.files"/>
+ </delete>
+ <delete dir="${javadocRoot}"/>
+ <delete dir="bin"/>
+ <mkdir dir="bin"/>
+</target>
+
+<target name="archive" depends="init, clean" description="Copy clean project tree to archive area.">
+ <echo message="Copy project tree into archive area."/>
+ <mkdir dir="${archiveRoot}\${archiveTime}"/>
+ <copy todir="${archiveRoot}\${archiveTime}">
+  <fileset dir="."/>
+ </copy>
+</target>
+
+<target name="compile" depends="clean" description="Create all .class files in place, beside .java files">
+ <echo message="Compile in place, to ensure no secondary files are missed."/>
+ <javac 
+   srcdir="${srcRoot}"  
+   classpath="C:\myname\Projects\Libraries\junit3.8.1\junit.jar;C:\myname\Projects\Libraries\JavaLookAndFeelGraphics\jlfgr-1_0.jar;C:\myname\Projects\Libraries\javahelp-1_1_3\jh1.1.3\javahelp\lib\jh.jar"
+   source="1.7"
+ />
+</target>
+ 
+<target name="build.runnable.jar" depends="compile" description="Build a runnable jar.">
+ <echo message="Jar up classes and support files."/>
+ <mkdir dir="${distRoot}\${archiveTime}"/>
+ <jar jarfile="${distRoot}\${archiveTime}\${targetJar}"  manifest="${manifestMainClass}" basedir="${srcRoot}" excludes="**/*.java, **/TEST*.class">
+ </jar>
+ <echo message="Copy runnable jar to jnlp directory, for subsequent FTP."/>
+ <copy file="${distRoot}\${archiveTime}\${targetJar}" todir="jnlp"/>
+ <echo message="Copy helper jars to same jnlp directory."/>
+ <copy file="lib/jh.jar" todir="jnlp"/>
+ <copy file="lib/jlfgr-1_0.jar" todir="jnlp"/>
+</target>
+
+<!-- usually run with package=true, but run with private=true occasionally to check javadoc attached to private members(links and so on)-->
+<target name="javadoc" depends="init" description="Generate all javadoc."> 
+ <javadoc packagenames="hirondelle.stocks.*"
+   destdir="${javadocRoot}"
+   additionalparam="-source 1.7 -noqualifier java.*:javax.*:com.sun.*:hirondelle.stocks.*   ${javadocApiRoots}"
+   author="true"
+   version="true"
+   header="StocksMonitor ${version}"
+   package="true"
+   windowtitle="StocksMonitor ${version} Javadoc"
+   bottom="Copyright Hirondelle Systems - &lt;a href=http://creativecommons.org/licenses/by/1.0/&gt;License&lt;/a&gt; - Generated ${archiveTime}"
+   Overview="src\overview.html">
+    <fileset dir="src"  defaultexcludes="yes">
+      <include name="**/*.java"/>      
+      <exclude name="**/TEST*"/>
+    </fileset>   
+    <doctitle><![CDATA[<h1>StocksMonitor 1.7.0</h1>]]></doctitle>
+   <classpath>
+    <pathelement location="C:\myname\Projects\Libraries\junit3.4\junit.jar"/>
+    <pathelement location="C:\myname\Projects\Libraries\javahelp-1_1_3\jh1.1.3\javahelp\lib\jh.jar"/>
+   </classpath>
+  </javadoc>
+</target>
+</project>

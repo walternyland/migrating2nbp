@@ -1,0 +1,148 @@
+
+This is an example Swing application, built using 
+JDK 1.7.0.
+
+Its implementation is available at 
+http://www.javapractices.com/topic/TopicAction.do?Id=170
+
+License:
+http://creativecommons.org/licenses/by/1.0/
+
+All are welcome to contribute suggestions for eliminating
+its bugs, or for any other improvements to the
+implementation of this program. (Please note the remarks 
+below about minimal growth of the feature set.) All 
+contributions will be credited.
+
+Send suggestions to: 
+webmaster@javapractices.com
+
+----------------------------------------------------------
+These members of the Java community have contributed 
+to the improvement of this application:
+
+- Thomas Zander
+
+----------------------------------------------------------
+Known Bugs :
+
+- Under File->Preferences, changing to large sized 
+  icons is reflected only after a restart, instead
+  of immediately. 
+
+- The rendering of some widgets in the 
+  File->Preferences dialog is incorrect under Linux,
+  having some items far too small. (Still a problem?)
+
+- JavaHelp : Search display is often truncating the 
+  title text. See Sun bug #4736708.
+
+- Large Font + Low Vision: should use large icons.
+
+- Large Font: Edit->Portfolio has exchange field 
+  bit wider than others. The text fields have their
+  number of columns hard-coded, while the Exchange
+  field does not.
+
+- Large Font + JavaHelp: the navigation widgets have
+  larger font, but not the help topics themselves. 
+  Possible cause: an entry is missing from the 
+  Theme.LargeFont class, which specifies font size 
+  for the corresponding HTML widget. Odd: the HTML
+  content pane is what type of widget? It is not a 
+  JEditorPane, since that item does indeed change 
+  font size in the expected manner. As well, the 
+  Theme class seems to override all necessary items
+  (though it is not confirmed if all such overridden
+  items are indeed exercised by this app's GUI).
+
+- Large Font + JavaHelp: the JavaHelp system is
+  initiated upon startup. If the user changes 
+  from small to large font, the update is not 
+  seen in JavaHelp until the app is restarted.
+  Trade-off: HelpAction has code to prevent such 
+  re-init, since it is time-consuming. If this is
+  removed, then all users are penalized if they 
+  use the HelpSystem more than once.
+
+----------------------------------------------------------
+Remarks regarding example applications in general:
+
+Example applications seem to form a special category, 
+and have concerns which are a bit different from 
+typical software:
+
+- Intended as an example worthy of imitation.
+
+- Intended as a contribution to a "literature" of 
+  high quality programs.
+
+- Meant more to be read by other programmers, rather
+  than used by some target user audience. This 
+  encourages the implementor to provide an 
+  implementation of high quality. (Typically, the 
+  the author would edit the source several times 
+  before publishing.) Unfortunately, the quality of 
+  most open source apps does not seem very high. 
+  This is probably due to more effort being put 
+  into features and fixes, as opposed to refactoring
+  and documentation.
+  
+- The list of bugs should be as small as possible.
+
+- Should use only the JDK, and no third party 
+  libraries. There are excellent third party 
+  tools, but these do not seem appropriate in 
+  an example meant for the JDK.
+
+- The implementation should be updated after every 
+  major release of the JDK, to reflect important new 
+  features.
+
+- The implementation should be updated when any 
+  improvements are discovered - bug fixes, better 
+  design, better style, etc.
+
+- The size range should usually be about 20..100 
+  classes. It is impossible to constrain an example 
+  application to any precise size range, but the 
+  idea is to have an application large enough to 
+  be non-trivial, but not so large that it is 
+  overwhelming for an average programmer. (On the 
+  other hand, a very large application would also
+  be interesting to examine.)
+
+- The focus is on typical tasks found in typical
+  applications. An example application is useful 
+  to the reader only if they can actually steal 
+  its ideas. This seems more likely if the app 
+  is "mainstream". This application falls a bit 
+  short in this regard, since it does not use a
+  relational database.
+
+- The javadoc should be polished and accurate.
+  The main tool for discovering the structure of 
+  the app should be javadoc, and the -linksource 
+  option should be used to generate links from 
+  javadoc to underlying source code.
+
+- The feature set should *not* grow very quickly, 
+  and perhaps not at all. If a feature is added, 
+  it should be added to illustrate a specific point, 
+  not simply because it is possible. This is very 
+  unusual for software. Unrestricted growth of the 
+  feature set will mean the reader will have a more
+  onerous task, and so will the maintainer, who will
+  occasionally need to re-edit the entire program.
+
+- Clarity and simplicity are important for the reader.
+  A presentation style which will guide the reader more 
+  quickly to an understanding of some point is always 
+  best. This applies to both javadoc and source code.
+
+-----------------------------------------------------
+John O'Hanley is the principal author of this application.
+He lives in Canada.
+
+"Le talent n'est qu'une longue patience. Travaillez."
+- Advice from Flaubert to the young Guy de Maupassant.
