@@ -24,6 +24,7 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingWorker;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
+import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
 import org.openide.util.NbBundle.Messages;
 
@@ -51,9 +52,13 @@ import org.openide.util.NbBundle.Messages;
         id = "hirondelle.stocks.quotes.UpdateAction"
 )
 @ActionRegistration(
-        displayName = "#CTL_UpdateAction"
+        displayName = "#CTL_UpdateAction",
+        iconBase = "toolbarButtonGraphics/general/Refresh24.gif"
 )
-@ActionReference(path = "Menu/Edit", position = 0)
+@ActionReferences({
+    @ActionReference(path = "Menu/Edit", position = 0),
+    @ActionReference(path = "Toolbars/File", position = 70)
+})
 @Messages("CTL_UpdateAction=Update")
 public final class FetchQuotesAction extends AbstractAction implements Observer {
 

@@ -9,117 +9,122 @@ import java.util.logging.*;
 import hirondelle.stocks.portfolio.Portfolio;
 import hirondelle.stocks.portfolio.CurrentPortfolio;
 import hirondelle.stocks.portfolio.PortfolioDAO;
-import hirondelle.stocks.util.Args;
 import hirondelle.stocks.util.ui.UiUtil;
 import hirondelle.stocks.util.Util;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
+import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
 import org.openide.util.NbBundle;
 import org.openide.windows.WindowManager;
 
 /**
-* Delete the {@link CurrentPortfolio} from storage, and display an untitled 
-* portfolio to the user, which does not need a save.
-* 
-*<P>The user is always asked to first confirm the deletion.
-*/
-
+ * Delete the {@link CurrentPortfolio} from storage, and display an untitled
+ * portfolio to the user, which does not need a save.
+ * 
+* <P>
+ * The user is always asked to first confirm the deletion.
+ */
 @ActionID(
         category = "File",
         id = "hirondelle.stocks.quotes.DeleteAction"
 )
 @ActionRegistration(
-        displayName = "#CTL_DeleteAction"
+        displayName = "#CTL_DeleteAction",
+        iconBase = "toolbarButtonGraphics/general/Delete24.gif"
 )
-@ActionReference(separatorAfter = 65, path = "Menu/File", position = 60)
+@ActionReferences({
+    @ActionReference(path = "Menu/File", position = 60),
+    @ActionReference(path = "Toolbars/File", position = 60)
+})
 @NbBundle.Messages("CTL_DeleteAction=Delete")
 
 public final class FileDeleteAction extends AbstractAction implements Observer {
-  
-  /**
-  * Constructor. 
-  * @param aCurrentPortfolio will be deleted from storage by this action.
-  * @param aParentFrame window to which this action is attached.
-  */
-  public FileDeleteAction() {
-//  public FileDeleteAction(CurrentPortfolio aCurrentPortfolio, JFrame aParentFrame) {
-    super("Delete", UiUtil.getImageIcon("/toolbarButtonGraphics/general/Delete")); 
-//    Args.checkForNull(aParentFrame);
-    fCurrentPortfolio = CentralLookup.getDefault().lookup(CurrentPortfolio.class);
-    fCurrentPortfolio.addObserver( this );
-    fFrame = (JFrame)WindowManager.getDefault().getMainWindow();
-    putValue(SHORT_DESCRIPTION, "Delete the current portfolio");
-    putValue(
-      LONG_DESCRIPTION, "Delete the current portfolio,both  from view and storage."
-    );
-    putValue(MNEMONIC_KEY, new Integer(KeyEvent.VK_D) );    
-  }
 
-  @Override public void actionPerformed(ActionEvent e) {
-    fLogger.info("Deleting the current portfolio from storage.");
-    if ( isConfirmed() ) {
-      deleteCurrentPortfolio();
+    /**
+     * Constructor.
+     *
+     * @param aCurrentPortfolio will be deleted from storage by this action.
+     * @param aParentFrame window to which this action is attached.
+     */
+    public FileDeleteAction() {
+//  public FileDeleteAction(CurrentPortfolio aCurrentPortfolio, JFrame aParentFrame) {
+        super("Delete", UiUtil.getImageIcon("/toolbarButtonGraphics/general/Delete"));
+//    Args.checkForNull(aParentFrame);
+        fCurrentPortfolio = CentralLookup.getDefault().lookup(CurrentPortfolio.class);
+        fCurrentPortfolio.addObserver(this);
+        fFrame = (JFrame) WindowManager.getDefault().getMainWindow();
+        putValue(SHORT_DESCRIPTION, "Delete the current portfolio");
+        putValue(
+                LONG_DESCRIPTION, "Delete the current portfolio,both  from view and storage."
+        );
+        putValue(MNEMONIC_KEY, new Integer(KeyEvent.VK_D));
     }
-  }  
-  
-  /**
-  * Synchronize the state of this object with the state of the 
-  * {@link CurrentPortfolio} passed to the constructor.
-  *
-  * This action is enabled only when the <tt>CurrentPortfolio</tt> is titled.
-  */
-  public void update(Observable aPublisher, Object aData) {
-    setEnabled( ! fCurrentPortfolio.isUntitled() );
-  } 
-  
-  // PRIVATE 
-  private CurrentPortfolio fCurrentPortfolio;
-  private JFrame fFrame;
-  private static final Logger fLogger = Util.getLogger(FileDeleteAction.class); 
-  
-  private boolean isConfirmed(){
-    String title = UiUtil.getDialogTitle("Confirm Delete");
-    String message = 
-      "Are you sure you want to delete the Portfolio named '" + 
-       fCurrentPortfolio.getName() + "' ?"
-    ;
-    /* 
-    * Implementation Note
-    * The implementation is complicated by the need to disable the default Yes 
-    * button, which is not appropriate for a dialog which confirms a delete.
-    * If this was not necessary, the implementation would be just two lines:
-    * int result = JOptionPane.showConfirmDialog(
-    *   fFrame, message, title, JOptionPane.YES_NO_OPTION
-    * );
-    * return (result == JOptionPane.YES_OPTION ? true : false);
-    */
-    JOptionPane optionPane = new JOptionPane(
-      message, JOptionPane.WARNING_MESSAGE, JOptionPane.YES_NO_OPTION
-    );
-    JDialog dialog = optionPane.createDialog(fFrame, title);
-    UiUtil.noDefaultButton(dialog.getRootPane());
-    dialog.setVisible(true);
-    return hasSelectedYes(optionPane);
-  }
-  
-  private boolean hasSelectedYes(JOptionPane aOptionPane){
-    boolean result = false;
-    Object selection = aOptionPane.getValue();
-    if (selection != null && selection instanceof Integer){
-      Integer selectionVal = (Integer)selection; //cannot avoid cast
-      if (selectionVal.intValue() == JOptionPane.YES_OPTION){
-        result = true;
-      }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        fLogger.info("Deleting the current portfolio from storage.");
+        if (isConfirmed()) {
+            deleteCurrentPortfolio();
+        }
     }
-    fLogger.fine("Selected Yes?: " + result);
-    return result;
-  }
-  
-  private void deleteCurrentPortfolio(){
-    PortfolioDAO portfolioDAO = new PortfolioDAO();
-    portfolioDAO.delete(fCurrentPortfolio.getPortfolio());
-    fCurrentPortfolio.setPortfolio(Portfolio.getUntitledPortfolio());
-    fCurrentPortfolio.notifyObservers();
-  }
+
+    /**
+     * Synchronize the state of this object with the state of the
+     * {@link CurrentPortfolio} passed to the constructor.
+     *
+     * This action is enabled only when the <tt>CurrentPortfolio</tt> is titled.
+     */
+    public void update(Observable aPublisher, Object aData) {
+        setEnabled(!fCurrentPortfolio.isUntitled());
+    }
+
+    // PRIVATE 
+    private CurrentPortfolio fCurrentPortfolio;
+    private JFrame fFrame;
+    private static final Logger fLogger = Util.getLogger(FileDeleteAction.class);
+
+    private boolean isConfirmed() {
+        String title = UiUtil.getDialogTitle("Confirm Delete");
+        String message
+                = "Are you sure you want to delete the Portfolio named '"
+                + fCurrentPortfolio.getName() + "' ?";
+        /* 
+         * Implementation Note
+         * The implementation is complicated by the need to disable the default Yes 
+         * button, which is not appropriate for a dialog which confirms a delete.
+         * If this was not necessary, the implementation would be just two lines:
+         * int result = JOptionPane.showConfirmDialog(
+         *   fFrame, message, title, JOptionPane.YES_NO_OPTION
+         * );
+         * return (result == JOptionPane.YES_OPTION ? true : false);
+         */
+        JOptionPane optionPane = new JOptionPane(
+                message, JOptionPane.WARNING_MESSAGE, JOptionPane.YES_NO_OPTION
+        );
+        JDialog dialog = optionPane.createDialog(fFrame, title);
+        UiUtil.noDefaultButton(dialog.getRootPane());
+        dialog.setVisible(true);
+        return hasSelectedYes(optionPane);
+    }
+
+    private boolean hasSelectedYes(JOptionPane aOptionPane) {
+        boolean result = false;
+        Object selection = aOptionPane.getValue();
+        if (selection != null && selection instanceof Integer) {
+            Integer selectionVal = (Integer) selection; //cannot avoid cast
+            if (selectionVal.intValue() == JOptionPane.YES_OPTION) {
+                result = true;
+            }
+        }
+        fLogger.fine("Selected Yes?: " + result);
+        return result;
+    }
+
+    private void deleteCurrentPortfolio() {
+        PortfolioDAO portfolioDAO = new PortfolioDAO();
+        portfolioDAO.delete(fCurrentPortfolio.getPortfolio());
+        fCurrentPortfolio.setPortfolio(Portfolio.getUntitledPortfolio());
+        fCurrentPortfolio.notifyObservers();
+    }
 }
