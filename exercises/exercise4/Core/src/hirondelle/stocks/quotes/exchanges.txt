@@ -1,0 +1,66 @@
+# Contains list of stock exchanges as used by Yahoo. (See http://finance.yahoo.com/sd)
+# This file is placed in the java source tree, and accessed using Class.getResource
+# by an enumeration class upon loading, where, each line is used to 
+# create an element of the enumeration. 
+# This text file is part of the build, and will need to reside 
+# in the same directory as the corresponding type-safe enum class.
+#
+# Format of each line:
+# Full Name Of Exchange + TAB + short name + TAB + Yahoo Exchange Suffix
+# 
+# Note that both short name and suffix may be N/A (not applicable).
+#
+# Note as well that no extra lines can appear at the end of this file, or a parse 
+# error will result.
+NYSE Stock Exchanges	(NYS)	N/A
+Nasdaq Stock Exchange	(NAS)	N/A
+American Stock Exchange	(ASE)	N/A
+OTC Bulletin Board Market	(OBB)	.OB
+Pink Sheets	(N/A)	.PK
+Amsterdam Stock Exchange	(AEX)	.AS
+Australian Stock Exchange	(ASX)	.AX
+Barcelona Stock Exchange	(BAR)	.BC
+Berlin Stock Exchange	(BER)	.BE
+Bilbao Stock Exchange	(BIL)	.BI
+Bombay Stock Exchange	(BSE)	.BO
+Bremen Stock Exchange	(BRE)	.BM
+Buenos Aires Stock Exchange	(BUE)	.BA
+Calcutta Stock Exchange	(CAL)	.CL
+Copenhagen Stock Exchange	(CPH)	.CO
+Dusseldorf Stock Exchange	(DUS)	.D
+Frankfurt Stock Exchange	(FRA)	.F
+Hamburg Stock Exchange	(HAM)	.H
+Hanover Stock Exchange	(HAN)	.HA
+Hong Kong Stock Exchange	(HKG)	.HK
+Jakarta Stock Exchange	(JKT)	.JK
+Korea Stock Exchange	(KSC)	.KS
+KOSDAQ	(KOE)	.KQ
+Kuala Lumpur Stock Exchange	(KLS)	.KL
+Lima Stock Exchange	(LMA)	.LM
+London Stock Exchange	(LSE)	.L
+Madrid Fixed Income Market	(N/A)	.MF
+Madrid SE C.A.T.S.	(MCE)	.MC
+Madrid Stock Exchange	(MAD)	.MA
+Mexico Stock Exchange	(MEX)	.MX
+Milan Stock Exchange	(MIL)	.MI
+Munich Stock Exchange	(MUN)	.MU
+National Stock Exchange of India	(NSI)	.NS
+New Zealand Stock Exchange	(NZE)	.NZ
+Oslo Stock Exchange	(OSL)	.OL
+Paris Stock Exchange	(PAR)	.PA
+Santiago Stock Exchange	(SGO)	.SN
+Sao Paolo Stock Exchange	(SAO)	.SA
+Shanghai Stock Exchange	(SHH)	.SS
+Shenzhen Stock Exchange	(SHZ)	.SZ
+Singapore Stock Exchange	(SES)	.SI
+Stockholm Stock Exchange	(STO)	.ST
+Stock Exchange of Thailand	(SET)	.BK
+Stuttgart Stock Exchange	(STU)	.SG
+Swiss Exchange	(SWX)	.S
+Taiwan OTC Exchange	(TWO)	.TWO
+Taiwan Stock Exchange	(TAI)	.TW
+Tel Aviv Stock Exchange	(TLV)	.TA
+Toronto Stock Exchange	(TOR)	.TO
+TSX Venture Exchange	(CVE)	.V
+Vienna Stock Exchange	(VIE)	.VA
+XETRA Stock Exchange	(GER)	.DE
